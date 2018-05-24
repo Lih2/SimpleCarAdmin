@@ -20,12 +20,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 public class CarController {
 
+/*
     private Map<String,String> getCarInfoFromString(String carString) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Map <String,String> carMap = new HashMap<>();
         carMap = objectMapper.readValue(carString, new TypeReference<Map<String,String>>() {});
         return carMap;
     }
+*/
 
     @RequestMapping("/caradmin")
     public ArrayList<Car> caradmin(
@@ -36,32 +38,26 @@ public class CarController {
 
     @RequestMapping(value = "/caradd", method = RequestMethod.POST)
     public ArrayList<Car> caradd (
-            @RequestBody String carString ) throws IOException  {
+            @RequestBody Car car ) throws IOException  {
 
-        Map<String, String> carMap = getCarInfoFromString(carString);
         CarStorage carStorage=new CarStorage();
-        Car car = new Car(carMap.get("number"),carMap.get("name"),Integer.parseInt(carMap.get("year")),Float.parseFloat(carMap.get("price")));
         carStorage.add(car);
         return carStorage.getCars();
     }
 
     @RequestMapping(value = "/cardel", method = RequestMethod.POST)
     public ArrayList<Car> cardel (
-            @RequestBody String carString ) throws IOException {
-
-        Map<String, String> carMap = getCarInfoFromString(carString);
+            @RequestBody Car car ) throws IOException {
         CarStorage carStorage=new CarStorage();
-        carStorage.delete(carMap.get("number"));
+        carStorage.delete(car.getNumber());
         return carStorage.getCars();
     }
 
     @RequestMapping(value = "/caredit", method = RequestMethod.POST)
     public Car caredit (
-            @RequestBody String carString ) throws IOException {
-
-        Map<String, String> carMap = getCarInfoFromString(carString);
+            @RequestBody Car car ) throws IOException {
         CarStorage carStorage=new CarStorage();
-        return carStorage.getCarForNumber(carMap.get("number"));
+        return carStorage.getCarForNumber(car.getNumber());
     }
 
 

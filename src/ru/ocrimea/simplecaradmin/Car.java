@@ -7,6 +7,10 @@ public class Car {
     private float price;
     private String number;
 
+    public Car() {
+
+    }
+
     public Car(String number,String name,int year,float price) {
         this.number = number;
         this.name = name;
