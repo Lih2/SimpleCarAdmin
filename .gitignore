@@ -1,0 +1,13 @@
+.idea/
+target/
+out/
+build/
+*.iml
+*.xml
+*.jar
+!build.xml
+!pom.xml
+*.properties
+.gradle/
+!gradle-wrapper.properties
+!gradle-wrapper.jar
