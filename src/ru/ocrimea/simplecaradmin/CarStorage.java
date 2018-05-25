@@ -5,6 +5,7 @@ import java.util.*;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import javax.annotation.PostConstruct;
 
 @Component
 @Repository
@@ -15,11 +16,16 @@ public class CarStorage {
     private ArrayList<Car> cars = new ArrayList<>();
 
     public CarStorage() {
+    }
+
+    @PostConstruct
+    public void init(){
         add("КУ197М777","Audi Q7 3.0TDI",2016,4000000);
         add("КУ197М775","BMW X5 3.0TDI",2017,3000000);
         add("КУ123М775","BMW X5 3.0TDI",2013,1500000);
         add("ДА197М777","Smart Forfour 0.9t",2016,2000000);
     }
+
 
     public ArrayList<Car> getCars() {
         return cars;
