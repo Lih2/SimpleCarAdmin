@@ -10,16 +10,17 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Repository
 @Service
 
+@Slf4j
 public class CarStorage {
 
     private ArrayList<Car> cars = new ArrayList<>();
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
+    
     public CarStorage() {
     }
 
@@ -38,7 +39,7 @@ public class CarStorage {
 
     public void add(Car car) {
         delete(car.getNumber());
-        logger.info("Adding Car" + car.getNumber());
+        log.info("Adding Car" + car.getNumber());
         cars.add(car);
     }
 
@@ -51,7 +52,7 @@ public class CarStorage {
         while(carIterator.hasNext()) {
             Car car = carIterator.next();
             if( car.getNumber().equals(number)) {
-                logger.info("Deleting Car" + number);
+                log.info("Deleting Car" + number);
                 carIterator.remove();
             }
         }
