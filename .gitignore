@@ -2,6 +2,7 @@
 target/
 out/
 build/
+logs/
 *.iml
 *.xml
 *.jar
@@ -11,3 +12,4 @@ build/
 .gradle/
 !gradle-wrapper.properties
 !gradle-wrapper.jar
+!logback-spring.xml

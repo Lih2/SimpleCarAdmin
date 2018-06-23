@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 @Component
 @Repository
 @Service
@@ -14,6 +18,7 @@ import javax.annotation.PostConstruct;
 public class CarStorage {
 
     private ArrayList<Car> cars = new ArrayList<>();
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public CarStorage() {
     }
@@ -33,6 +38,7 @@ public class CarStorage {
 
     public void add(Car car) {
         delete(car.getNumber());
+        logger.info("Adding Car" + car.getNumber());
         cars.add(car);
     }
 
@@ -41,12 +47,13 @@ public class CarStorage {
     }
 
     public void delete(String number) {
-
         Iterator<Car> carIterator=cars.iterator();
         while(carIterator.hasNext()) {
             Car car = carIterator.next();
-            if( car.getNumber().equals(number))
+            if( car.getNumber().equals(number)) {
+                logger.info("Deleting Car" + number);
                 carIterator.remove();
+            }
         }
     }
 
