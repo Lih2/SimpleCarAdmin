@@ -2,6 +2,7 @@
 target/
 out/
 build/
+resources/static/node_modules/
 logs/
 *.iml
 *.xml
@@ -13,3 +14,5 @@ logs/
 !gradle-wrapper.properties
 !gradle-wrapper.jar
 !logback-spring.xml
+resources/static/gulpfile.jsUU
+resources/static/index2.html
