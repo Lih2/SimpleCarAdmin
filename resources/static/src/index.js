@@ -8,6 +8,6 @@ class Helloworld extends React.Component {
 }
 
 ReactDOM.render(
-  <Helloworld />,
+  <Helloworld year="2018"/>,
   document.getElementById('helloworld')
 );

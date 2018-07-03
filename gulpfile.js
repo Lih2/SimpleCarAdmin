@@ -3,6 +3,10 @@ var babel = require("gulp-babel");
 var concat = require('gulp-concat');
 var browserify = require('browserify');
 var del = require('del');
+var source = require("vinyl-source-stream");
+var buffer = require("vinyl-buffer");
+var uglify = require("gulp-uglify");
+
 
 gulp.task('clean', function() {      // сам таск удаления 
   del.sync('dist');    
@@ -17,16 +21,15 @@ gulp.task('default', ['clean'], () => {
 });
 
 gulp.task('build', ['default'], () => {
-	
-	var b = browserify({
-      entries: 'dist/.js',
-      debug: false,
-	  transform:'reactify'
-    });	
-	
-    return b.bundle()
-	.pipe(concat('build.js'))
-    .pipe(gulp.dest('dist'));					
+  browserify({
+    entries: 'src/index.js',
+    debug: true
+  })
+  .bundle()
+  .pipe(source('build.min.js'))
+  .pipe(buffer())
+  .pipe(uglify())
+  .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('watch', function () {
