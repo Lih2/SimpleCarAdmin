@@ -1,75 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class CarApp extends React.Component {
+
+class App extends React.Component {
 	
-    constructor(props) {
-          super(props);			  
-		  this.state = {
-	        cars: []        			
-            };	 
-          this.addCar = this.addCar.bind(this);				
-          this.deleteCar = this.deleteCar.bind(this);			  
-	}
 	
-	componentDidMount() {
-		this.loadData();
-	}  
-			 
-   loadData() {
-     fetch('/caradmin').then(results => { return results.json() }).then(data => {
-          this.setState({cars: data });
-     }).catch(() => {
-          alert('Ошибка!');
-     });
-   }
-       
-  deleteCar(number) {
-	     let JSONObject= {
-             "number":number,
-             };	   	 		 		 		 
-		 fetch("/cardel", {
-			method: "POST",		
-			body: JSON.stringify(JSONObject),			
-			headers: {
-			'Accept': 'application/json, text/plain, */*',
-			'Content-Type': 'application/json'
-			},						
-		}).then(results => { return results.json() }).then(data => {
-          this.setState({cars: data });
-     }).catch(() => {
-          alert('Ошибка выполнения запроса!');
-     });	  
-  }
-    
-  addCar(number,name,year,price) {
-	     let JSONObject= {
-             "name":name,
-             "number":number,
-             "price":price,
-             "year":year
-             };	   	 		 		 		 
-		 fetch("/caradd", {
-			method: "POST",		
-			body: JSON.stringify(JSONObject),			
-			headers: {
-			'Accept': 'application/json, text/plain, */*',
-			'Content-Type': 'application/json'
-			},						
-		}).then(results => { return results.json() }).then(data => {
-          this.setState({cars: data });
-     }).catch(() => {
-          alert('Ошибка выполнения запроса!');
-     });
-			
-    }
-       		
-   render() {
-		return <div>
-		         <UserForm handleAddCar={this.addCar} />
-				 <CarData cars={this.state.cars} handleDeleteCar={this.deleteCar} />
-			   </div>;
-	}
+	
 	
 }
 
@@ -79,21 +15,20 @@ class UserForm extends React.Component {
      constructor(props) {
           super(props);
 		  
-		  this.state = {
+          this.state = {
             number: '',
             name: '',
             year: '',
-            price: ''				
-            };	 
-			
+            price: ''			
+          };		  
+		  
+          this.addCar = this.addCar.bind(this);	
           this.handleChangeNumber = this.handleChangeNumber.bind(this);			  	
 		  this.handleChangeName = this.handleChangeName.bind(this);			  	
 		  this.handleChangeYear = this.handleChangeYear.bind(this);			  			  
 		  this.handleChangePrice = this.handleChangePrice.bind(this);			  			  		  
-				  
-          this.addCar = this.addCar.bind(this);	
      }
-	 
+	 	 
 	handleChangeNumber(event) {
         this.setState({
             number: event.target.value,
@@ -113,11 +48,23 @@ class UserForm extends React.Component {
         this.setState({
             price: event.target.value,
         });
-    }		 
-	 	 
-	addCar(e) {   
+    }	 
+		 
+	 addCar(e) {   
       e.preventDefault();	
-	  this.props.handleAddCar(this.state.number,this.state.name,this.state.year,this.state.price);			 
+	  
+      let JSONObject= {
+             "name":this.state.name,
+             "number":this.state.number,
+             "price":this.state.price,
+             "year":this.state.year
+             };
+			 
+		fetch("/addcar", {
+			method: "POST",		
+			body: JSON.stringify(JSONObject)
+		});			 
+			 
     }		 
 	
    render() {	   
@@ -157,19 +104,34 @@ class UserForm extends React.Component {
 	
    }		
 }
+ReactDOM.render(
+  <UserForm />,
+  document.getElementById('userform')
+);
+
 
 class CarData extends React.Component {
 
      constructor(props) {	
-	  super(props);	
-	  
-      this.deleteCar = this.deleteCar.bind(this);		  
+	  super(props);
+	    this.state = {
+	        cars: [],
+            };
     }
-	
-	deleteCar(number) {   
-	  this.props.handleDeleteCar(number);			 		
-	}
-		
+
+
+   loadData() {
+     fetch('/caradmin').then(results => { return results.json() }).then(data => {
+          this.setState({cars: data });
+     }).catch(() => {
+          alert('Ошибка!');
+     });
+  }
+
+  componentDidMount() {
+    this.loadData();
+  }  
+
   render() {
         return (
             <table className="table" >
@@ -187,30 +149,29 @@ class CarData extends React.Component {
                     <th>
                        Стоимость
                     </th>
-                    <th>
-                    </th>
                 </tr>
         </thead>
         <tbody>
-            {this.props.cars.map(item => {
+            {this.state.cars.map(item => {
                 return (
                     <tr key={item.number}>
                         <td>{item.number}</td>
                         <td>{item.name}</td>
                         <td>{item.year}</td>
                         <td>{item.price}</td>                       
-                        <td><button class="btn btn-default" onClick={this.deleteCar.bind(null,item.number)}>Удалить</button></td>                       						
                         </tr>
                     );
                 })
             }
         </tbody>
     </table>);
-	}  
+}  
+
+
 }
 
-
-//ReactDOM.render( <UserForm />, document.getElementById('userform'));
-//ReactDOM.render( <CarData />, document.getElementById('cardata'));
-ReactDOM.render( <CarApp />,document.getElementById('carapp'));
+ReactDOM.render(
+  <CarData />,
+  document.getElementById('cardata')
+);
 

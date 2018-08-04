@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Car {
     private String number;
     private String name;
