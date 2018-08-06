@@ -2,7 +2,7 @@ export class CarService {
 
 
     getCars() {
-        return new Promise( (resolve, reject) => {
+        return new Promise((resolve, reject) => {
             $.ajax('/caradmin', {
                 type: 'GET',
                 contentType: "application/json",
@@ -13,16 +13,16 @@ export class CarService {
         });
     }
 
-    addCar(number,name,year,price) {
+    addCar(number, name, year, price) {
 
-        let JSONObject= {
-            "name":name,
-            "number":number,
-            "price":price,
-            "year":year
+        let JSONObject = {
+            "name": name,
+            "number": number,
+            "price": price,
+            "year": year
         };
 
-        return new Promise( (resolve, reject) => {
+        return new Promise((resolve, reject) => {
             $.ajax('/caradd', {
                 type: 'POST',
                 data: JSON.stringify(JSONObject),
@@ -36,11 +36,11 @@ export class CarService {
 
     deleteCar(number) {
 
-        let JSONObject= {
-            "number":number,
+        let JSONObject = {
+            "number": number,
         };
 
-        return new Promise( (resolve, reject) => {
+        return new Promise((resolve, reject) => {
             $.ajax('/cardel', {
                 type: 'POST',
                 data: JSON.stringify(JSONObject),
