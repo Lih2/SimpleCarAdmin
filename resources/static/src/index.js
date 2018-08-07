@@ -20,10 +20,6 @@ class CarList extends React.Component {
         this.handleChange = name => event => {
             this.setState({[name]: event.target.value});
         }
-
-        this.handleSubmit = event => {
-            this.addCar(event);
-        }
     }
 
     componentDidMount() {
@@ -74,7 +70,7 @@ class CarList extends React.Component {
 
     render() {
         return (<div>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={() => this.addCar(event)}>
                 <div className="row">
                     <div className="col-xs-12 divfon">
 
