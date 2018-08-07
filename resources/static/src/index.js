@@ -49,7 +49,14 @@ class CarList extends React.Component {
         e.preventDefault();
         this.carService.addCar(this.state.number, this.state.name, this.state.year, this.state.price).then(
             (data) => {
-                this.setState({cars: data});
+                this.setState(
+                    {
+                        cars: data,
+                        number: '',
+                        name: '',
+                        year: '',
+                        price: ''
+                    });
             })
             .catch((error) => {
                 alert("Ошибка добавления автомобиля");
@@ -77,22 +84,22 @@ class CarList extends React.Component {
 
                         <div className="form-group col-xs-2">
                             <input onChange={this.handleChange('number')} value={this.state.number} type="text" required
-                                   className="form-control" id="number" placeholder="Номер машины"/>
+                                   className="form-control" id="" placeholder="Номер машины"/>
                         </div>
 
                         <div className="form-group col-xs-4">
                             <input onChange={this.handleChange('name')} value={this.state.name} type="text" required
-                                   className="form-control" id="name" placeholder="Название машины"/>
+                                   className="form-control" placeholder="Название машины"/>
                         </div>
 
                         <div className="form-group col-xs-3">
                             <input onChange={this.handleChange('year')} value={this.state.year} type="number" required
-                                   className="form-control" id="year" placeholder="Год выпуска"/>
+                                   className="form-control" placeholder="Год выпуска"/>
                         </div>
 
                         <div className="form-group col-xs-3">
                             <input onChange={this.handleChange('price')} value={this.state.price} type="number" required
-                                   className="form-control" id="price" placeholder="Стоимость"/>
+                                   className="form-control" placeholder="Стоимость"/>
                         </div>
 
                         <div className="form-group col-xs-offset-9 col-xs-6">
