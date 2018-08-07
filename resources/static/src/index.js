@@ -16,10 +16,6 @@ class CarList extends React.Component {
         };
 
         this.carService = new CarService();
-
-        this.handleChange = name => event => {
-            this.setState({[name]: event.target.value});
-        }
     }
 
     componentDidMount() {
@@ -27,6 +23,7 @@ class CarList extends React.Component {
     }
 
     loadData() {
+
         this.carService.getCars().then(
             (data) => {
                 this.setState({cars: data});
@@ -38,7 +35,7 @@ class CarList extends React.Component {
     }
 
     addCar(e) {
-        e.preventDefault();
+
         this.carService.addCar(this.state.number, this.state.name, this.state.year, this.state.price).then(
             (data) => {
                 this.setState(
@@ -70,27 +67,27 @@ class CarList extends React.Component {
 
     render() {
         return (<div>
-            <form onSubmit={() => this.addCar(event)}>
+            <form onSubmit={(e) => { e.preventDefault(); this.addCar(event)} }>
                 <div className="row">
                     <div className="col-xs-12 divfon">
 
                         <div className="form-group col-xs-2">
-                            <input onChange={this.handleChange('number')} value={this.state.number} type="text" required
-                                   className="form-control" id="" placeholder="Номер машины"/>
+                            <input onChange={(e) => this.setState({'number': e.target.value})} value={this.state.number} type="text" required
+                                   className="form-control" placeholder="Номер машины"/>
                         </div>
 
                         <div className="form-group col-xs-4">
-                            <input onChange={this.handleChange('name')} value={this.state.name} type="text" required
+                            <input onChange={(e) => this.setState({'name': e.target.value})} value={this.state.name} type="text" required
                                    className="form-control" placeholder="Название машины"/>
                         </div>
 
                         <div className="form-group col-xs-3">
-                            <input onChange={this.handleChange('year')} value={this.state.year} type="number" required
+                            <input onChange={(e) => this.setState({'year': e.target.value})} type="number" required
                                    className="form-control" placeholder="Год выпуска"/>
                         </div>
 
                         <div className="form-group col-xs-3">
-                            <input onChange={this.handleChange('price')} value={this.state.price} type="number" required
+                            <input onChange={(e) => this.setState({'price': e.target.value})} value={this.state.price} type="number" required
                                    className="form-control" placeholder="Стоимость"/>
                         </div>
 
