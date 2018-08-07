@@ -21,10 +21,6 @@ class CarList extends React.Component {
             this.setState({[name]: event.target.value});
         }
 
-        this.handleDelete = event => {
-            this.deleteCar(event.target.id);
-        }
-
         this.handleSubmit = event => {
             this.addCar(event);
         }
@@ -141,7 +137,7 @@ class CarList extends React.Component {
                             <td>{item.year}</td>
                             <td>{item.price}</td>
                             <td>
-                                <button className="btn btn-default" onClick={this.handleDelete} id={item.number}>Удалить
+                                <button className="btn btn-default" onClick={() => this.deleteCar(item.number)}>Удалить
                                 </button>
                             </td>
                         </tr>
