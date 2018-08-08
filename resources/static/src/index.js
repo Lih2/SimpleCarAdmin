@@ -34,7 +34,7 @@ class CarList extends React.Component {
             });
     }
 
-    addCar(e) {
+    addCar(e) { 
 
         this.carService.addCar(this.state.number, this.state.name, this.state.year, this.state.price).then(
             (data) => {
