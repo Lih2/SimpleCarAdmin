@@ -19963,15 +19963,26 @@ if ("production" === 'production') {
 }
 
 },{"./cjs/react.development.js":21,"./cjs/react.production.min.js":22}],24:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+var _createClass = function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+}();
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
 
 var CarService = exports.CarService = function () {
     function CarService() {
@@ -20038,27 +20049,49 @@ var CarService = exports.CarService = function () {
 }();
 
 },{}],25:[function(require,module,exports){
-'use strict';
+"use strict";
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require('react-dom');
+var _reactDom = require("react-dom");
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _carService = require('./carService');
+var _carService = require("./carService");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _createClass = function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+}();
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _possibleConstructorReturn(self, call) {
+    if (!self) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
 
 var CarList = function (_React$Component) {
     _inherits(CarList, _React$Component);
@@ -20132,140 +20165,25 @@ var CarList = function (_React$Component) {
         value: function render() {
             var _this5 = this;
 
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'form',
-                    { onSubmit: function onSubmit(e) {
-                            e.preventDefault();_this5.addCar(event);
-                        } },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'row' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'col-xs-12 divfon' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'form-group col-xs-2' },
-                                _react2.default.createElement('input', { onChange: function onChange(e) {
-                                        return _this5.setState({ 'number': e.target.value });
-                                    }, value: this.state.number, type: 'text', required: true,
-                                    className: 'form-control', placeholder: '\u041D\u043E\u043C\u0435\u0440 \u043C\u0430\u0448\u0438\u043D\u044B' })
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'form-group col-xs-4' },
-                                _react2.default.createElement('input', { onChange: function onChange(e) {
-                                        return _this5.setState({ 'name': e.target.value });
-                                    }, value: this.state.name, type: 'text', required: true,
-                                    className: 'form-control', placeholder: '\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u0430\u0448\u0438\u043D\u044B' })
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'form-group col-xs-3' },
-                                _react2.default.createElement('input', { onChange: function onChange(e) {
-                                        return _this5.setState({ 'year': e.target.value });
-                                    }, type: 'number', required: true,
-                                    className: 'form-control', placeholder: '\u0413\u043E\u0434 \u0432\u044B\u043F\u0443\u0441\u043A\u0430' })
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'form-group col-xs-3' },
-                                _react2.default.createElement('input', { onChange: function onChange(e) {
-                                        return _this5.setState({ 'price': e.target.value });
-                                    }, value: this.state.price, type: 'number', required: true,
-                                    className: 'form-control', placeholder: '\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C' })
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'form-group col-xs-offset-9 col-xs-6' },
-                                _react2.default.createElement(
-                                    'button',
-                                    { className: 'btn btn-default' },
-                                    '\u0412\u0441\u0435 \u0432\u0435\u0440\u043D\u043E, \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C'
-                                )
-                            ),
-                            _react2.default.createElement('div', { className: 'clearfix' })
-                        )
-                    )
-                ),
-                _react2.default.createElement(
-                    'table',
-                    { className: 'table' },
-                    _react2.default.createElement(
-                        'thead',
-                        null,
-                        _react2.default.createElement(
-                            'tr',
-                            null,
-                            _react2.default.createElement(
-                                'th',
-                                null,
-                                '\u041D\u043E\u043C\u0435\u0440 \u043C\u0430\u0448\u0438\u043D\u044B'
-                            ),
-                            _react2.default.createElement(
-                                'th',
-                                null,
-                                '\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435'
-                            ),
-                            _react2.default.createElement(
-                                'th',
-                                null,
-                                '\u0413\u043E\u0434'
-                            ),
-                            _react2.default.createElement(
-                                'th',
-                                null,
-                                '\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C'
-                            ),
-                            _react2.default.createElement('th', null)
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'tbody',
-                        null,
-                        this.state.cars.map(function (item) {
-                            return _react2.default.createElement(
-                                'tr',
-                                { key: item.number },
-                                _react2.default.createElement(
-                                    'td',
-                                    null,
-                                    item.number
-                                ),
-                                _react2.default.createElement(
-                                    'td',
-                                    null,
-                                    item.name
-                                ),
-                                _react2.default.createElement(
-                                    'td',
-                                    null,
-                                    item.year
-                                ),
-                                _react2.default.createElement(
-                                    'td',
-                                    null,
-                                    item.price
-                                ),
-                                _react2.default.createElement(
-                                    'td',
-                                    null,
-                                    _react2.default.createElement(
-                                        'button',
-                                        { className: 'btn btn-default', onClick: function onClick() {
-                                                return _this5.deleteCar(item.number);
-                                            } },
-                                        '\u0423\u0434\u0430\u043B\u0438\u0442\u044C'
-                                    )
-                                )
-                            );
-                        })
-                    )
-                )
-            );
+            return _react2.default.createElement('div', null, _react2.default.createElement('form', { onSubmit: function onSubmit(e) {
+                    e.preventDefault();_this5.addCar(event);
+                } }, _react2.default.createElement('div', { className: 'row' }, _react2.default.createElement('div', { className: 'col-xs-12 divfon' }, _react2.default.createElement('div', { className: 'form-group col-xs-2' }, _react2.default.createElement('input', { onChange: function onChange(e) {
+                    return _this5.setState({ 'number': e.target.value });
+                }, value: this.state.number, type: 'text', required: true,
+                className: 'form-control', placeholder: "\u041D\u043E\u043C\u0435\u0440 \u043C\u0430\u0448\u0438\u043D\u044B" })), _react2.default.createElement('div', { className: 'form-group col-xs-4' }, _react2.default.createElement('input', { onChange: function onChange(e) {
+                    return _this5.setState({ 'name': e.target.value });
+                }, value: this.state.name, type: 'text', required: true,
+                className: 'form-control', placeholder: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043C\u0430\u0448\u0438\u043D\u044B" })), _react2.default.createElement('div', { className: 'form-group col-xs-3' }, _react2.default.createElement('input', { onChange: function onChange(e) {
+                    return _this5.setState({ 'year': e.target.value });
+                }, type: 'number', required: true,
+                className: 'form-control', placeholder: "\u0413\u043E\u0434 \u0432\u044B\u043F\u0443\u0441\u043A\u0430" })), _react2.default.createElement('div', { className: 'form-group col-xs-3' }, _react2.default.createElement('input', { onChange: function onChange(e) {
+                    return _this5.setState({ 'price': e.target.value });
+                }, value: this.state.price, type: 'number', required: true,
+                className: 'form-control', placeholder: "\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C" })), _react2.default.createElement('div', { className: 'form-group col-xs-offset-9 col-xs-6' }, _react2.default.createElement('button', { className: 'btn btn-default' }, "\u0412\u0441\u0435 \u0432\u0435\u0440\u043D\u043E, \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C")), _react2.default.createElement('div', { className: 'clearfix' })))), _react2.default.createElement('table', { className: 'table' }, _react2.default.createElement('thead', null, _react2.default.createElement('tr', null, _react2.default.createElement('th', null, "\u041D\u043E\u043C\u0435\u0440 \u043C\u0430\u0448\u0438\u043D\u044B"), _react2.default.createElement('th', null, "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435"), _react2.default.createElement('th', null, "\u0413\u043E\u0434"), _react2.default.createElement('th', null, "\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C"), _react2.default.createElement('th', null))), _react2.default.createElement('tbody', null, this.state.cars.map(function (item) {
+                return _react2.default.createElement('tr', { key: item.number }, _react2.default.createElement('td', null, item.number), _react2.default.createElement('td', null, item.name), _react2.default.createElement('td', null, item.year), _react2.default.createElement('td', null, item.price), _react2.default.createElement('td', null, _react2.default.createElement('button', { className: 'btn btn-default', onClick: function onClick() {
+                        return _this5.deleteCar(item.number);
+                    } }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C")));
+            }))));
         }
     }]);
 
