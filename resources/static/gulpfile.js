@@ -16,7 +16,7 @@ gulp.task('build', ['watch','clean','apply-prod-environment'], () => {
 	
   var browserifyOptions = {
         debug: false,
-        entries: 'src/index.js',
+        entries: 'src/carList.js',
         extensions: ['.jsx', '.js'],
     };	
 	

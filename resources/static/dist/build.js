@@ -19965,92 +19965,6 @@ if ("production" === 'production') {
 },{"./cjs/react.development.js":21,"./cjs/react.production.min.js":22}],24:[function(require,module,exports){
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var _createClass = function () {
-    function defineProperties(target, props) {
-        for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-        }
-    }return function (Constructor, protoProps, staticProps) {
-        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-    };
-}();
-
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-        throw new TypeError("Cannot call a class as a function");
-    }
-}
-
-var CarService = exports.CarService = function () {
-    function CarService() {
-        _classCallCheck(this, CarService);
-    }
-
-    _createClass(CarService, [{
-        key: 'getCars',
-        value: function getCars() {
-            return new Promise(function (resolve, reject) {
-                $.ajax('/caradmin', {
-                    type: 'GET',
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: resolve,
-                    error: reject
-                });
-            });
-        }
-    }, {
-        key: 'addCar',
-        value: function addCar(number, name, year, price) {
-
-            var JSONObject = {
-                "name": name,
-                "number": number,
-                "price": price,
-                "year": year
-            };
-
-            return new Promise(function (resolve, reject) {
-                $.ajax('/caradd', {
-                    type: 'POST',
-                    data: JSON.stringify(JSONObject),
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: resolve,
-                    error: reject
-                });
-            });
-        }
-    }, {
-        key: 'deleteCar',
-        value: function deleteCar(number) {
-
-            var JSONObject = {
-                "number": number
-            };
-
-            return new Promise(function (resolve, reject) {
-                $.ajax('/cardel', {
-                    type: 'POST',
-                    data: JSON.stringify(JSONObject),
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: resolve,
-                    error: reject
-                });
-            });
-        }
-    }]);
-
-    return CarService;
-}();
-
-},{}],25:[function(require,module,exports){
-"use strict";
-
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _react = require("react");
@@ -20192,4 +20106,90 @@ var CarList = function (_React$Component) {
 
 _reactDom2.default.render(_react2.default.createElement(CarList, null), document.getElementById('carlist'));
 
-},{"./carService":24,"react":23,"react-dom":20}]},{},[25]);
+},{"./carService":25,"react":23,"react-dom":20}],25:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _createClass = function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+}();
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
+
+var CarService = exports.CarService = function () {
+    function CarService() {
+        _classCallCheck(this, CarService);
+    }
+
+    _createClass(CarService, [{
+        key: 'getCars',
+        value: function getCars() {
+            return new Promise(function (resolve, reject) {
+                $.ajax('/caradmin', {
+                    type: 'GET',
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: resolve,
+                    error: reject
+                });
+            });
+        }
+    }, {
+        key: 'addCar',
+        value: function addCar(number, name, year, price) {
+
+            var JSONObject = {
+                "name": name,
+                "number": number,
+                "price": price,
+                "year": year
+            };
+
+            return new Promise(function (resolve, reject) {
+                $.ajax('/caradd', {
+                    type: 'POST',
+                    data: JSON.stringify(JSONObject),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: resolve,
+                    error: reject
+                });
+            });
+        }
+    }, {
+        key: 'deleteCar',
+        value: function deleteCar(number) {
+
+            var JSONObject = {
+                "number": number
+            };
+
+            return new Promise(function (resolve, reject) {
+                $.ajax('/cardel', {
+                    type: 'POST',
+                    data: JSON.stringify(JSONObject),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: resolve,
+                    error: reject
+                });
+            });
+        }
+    }]);
+
+    return CarService;
+}();
+
+},{}]},{},[24]);
