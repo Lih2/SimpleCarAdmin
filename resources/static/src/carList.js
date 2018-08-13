@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {CarService} from './carService';
+import {CarForm} from './carForm';
 
 class CarList extends React.Component {
 
@@ -9,12 +10,7 @@ class CarList extends React.Component {
         super(props);
         this.state = {
             cars: [],
-            number: '',
-            name: '',
-            year: '',
-            price: ''
         };
-
         this.carService = new CarService();
     }
 
@@ -34,23 +30,19 @@ class CarList extends React.Component {
             });
     }
 
-    addCar(e) { 
-
-        this.carService.addCar(this.state.number, this.state.name, this.state.year, this.state.price).then(
+    addCar(carState) {
+        this.carService.addCar(carState.number,carState.name,carState.year,carState.price).then(
             (data) => {
                 this.setState(
                     {
                         cars: data,
-                        number: '',
-                        name: '',
-                        year: '',
-                        price: ''
                     });
             })
             .catch((error) => {
                 alert("Ошибка добавления автомобиля");
                 console.log("Ошибка добавления автомобиля");
             });
+
     }
 
     deleteCar(number) {
@@ -67,40 +59,7 @@ class CarList extends React.Component {
 
     render() {
         return (<div>
-            <form onSubmit={(e) => { e.preventDefault(); this.addCar(event)} }>
-                <div className="row">
-                    <div className="col-xs-12 divfon">
-
-                        <div className="form-group col-xs-2">
-                            <input onChange={(e) => this.setState({'number': e.target.value})} value={this.state.number} type="text" required
-                                   className="form-control" placeholder="Номер машины"/>
-                        </div>
-
-                        <div className="form-group col-xs-4">
-                            <input onChange={(e) => this.setState({'name': e.target.value})} value={this.state.name} type="text" required
-                                   className="form-control" placeholder="Название машины"/>
-                        </div>
-
-                        <div className="form-group col-xs-3">
-                            <input onChange={(e) => this.setState({'year': e.target.value})} type="number" required
-                                   className="form-control" placeholder="Год выпуска"/>
-                        </div>
-
-                        <div className="form-group col-xs-3">
-                            <input onChange={(e) => this.setState({'price': e.target.value})} value={this.state.price} type="number" required
-                                   className="form-control" placeholder="Стоимость"/>
-                        </div>
-
-                        <div className="form-group col-xs-offset-9 col-xs-6">
-                            <button className="btn btn-default">Все верно, отправить</button>
-                        </div>
-
-                        <div className="clearfix"></div>
-
-                    </div>
-                </div>
-            </form>
-
+			<CarForm addCar={(state) => this.addCar(state)}/>
             <table className="table">
                 <thead>
                 <tr>
@@ -130,7 +89,7 @@ class CarList extends React.Component {
                             <td>{item.year}</td>
                             <td>{item.price}</td>
                             <td>
-                                <button className="btn btn-default" onClick={() => this.deleteCar(item.number)}>Удалить
+                                <button className="btn btn-default" onClick={()  => this.deleteCar(item.number)}>Удалить
                                 </button>
                             </td>
                         </tr>

@@ -8,11 +8,15 @@ var buffer = require("vinyl-buffer");
 var gutil = require('gulp-util');
 
 
-gulp.task('clean', function() {      // сам таск удаления 
+gulp.task('clean', () => {      // сам таск удаления 
   del.sync('dist');    
 });
 
-gulp.task('build', ['watch','clean','apply-prod-environment'], () => {
+gulp.task('start', ['build'], () => {
+   gulp.watch('src/*.js', ['build']);
+});
+
+gulp.task('build', ['clean','apply-prod-environment'], () => {
 	
   var browserifyOptions = {
         debug: false,
@@ -31,10 +35,10 @@ gulp.task('build', ['watch','clean','apply-prod-environment'], () => {
         .pipe(gulp.dest('dist'));      
 });
 
-gulp.task('apply-prod-environment', function() {
+gulp.task('apply-prod-environment', () => {
     process.env.NODE_ENV = 'production';
 });
 
-gulp.task('watch', function () {
+gulp.task('watch', () => {
     gulp.watch('src/*.js', ['build']);
 });
