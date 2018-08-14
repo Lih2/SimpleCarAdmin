@@ -13,6 +13,24 @@ export class CarService {
         });
     }
 
+    getCar(number) {
+
+        let JSONObject = {
+               "number": number,
+            };
+
+         return new Promise((resolve, reject) => {
+                $.ajax('/caredit', {
+                    data: JSON.stringify(JSONObject),
+                    type: 'POST',
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: resolve,
+                    error: reject
+                })
+            });
+    }
+
     addCar(number, name, year, price) {
 
         let JSONObject = {

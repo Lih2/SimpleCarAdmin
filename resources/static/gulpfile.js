@@ -38,7 +38,3 @@ gulp.task('build', ['clean','apply-prod-environment'], () => {
 gulp.task('apply-prod-environment', () => {
     process.env.NODE_ENV = 'production';
 });
-
-gulp.task('watch', () => {
-    gulp.watch('src/*.js', ['build']);
-});

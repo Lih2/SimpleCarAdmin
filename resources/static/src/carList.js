@@ -12,6 +12,7 @@ class CarList extends React.Component {
             cars: [],
         };
         this.carService = new CarService();
+        this.carFormRef = React.createRef();
     }
 
     componentDidMount() {
@@ -19,7 +20,6 @@ class CarList extends React.Component {
     }
 
     loadData() {
-
         this.carService.getCars().then(
             (data) => {
                 this.setState({cars: data});
@@ -29,6 +29,24 @@ class CarList extends React.Component {
                 console.log("Ошибка загрузки данных");
             });
     }
+
+     editCar(number) {
+               this.carService.getCar(number).then(
+                   (data) => {
+                      this.carFormRef.current.setState(
+                      {
+                        number:data.number,
+                        name:data.name,
+                        price:data.price,
+                        year:data.year
+                      })
+                   })
+                   .catch((error) => {
+                       alert("Ошибка загрузки автомобиля");
+                       console.log("Ошибка загрузки автомобиля");
+                   });
+
+     }
 
     addCar(carState) {
         this.carService.addCar(carState.number,carState.name,carState.year,carState.price).then(
@@ -59,7 +77,7 @@ class CarList extends React.Component {
 
     render() {
         return (<div>
-			<CarForm addCar={(state) => this.addCar(state)}/>
+			<CarForm addCar={(state) => this.addCar(state)} ref={this.carFormRef}/>
             <table className="table">
                 <thead>
                 <tr>
@@ -89,8 +107,12 @@ class CarList extends React.Component {
                             <td>{item.year}</td>
                             <td>{item.price}</td>
                             <td>
-                                <button className="btn btn-default" onClick={()  => this.deleteCar(item.number)}>Удалить
-                                </button>
+                                 <button className="btn btn-default" onClick={()  => this.deleteCar(item.number)}>
+                                    Удалить
+                                 </button>
+                                 <button className="btn btn-default" onClick={()  => this.editCar(item.number)}>
+                                    Редактировать
+                                 </button>
                             </td>
                         </tr>
                     );

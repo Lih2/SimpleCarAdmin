@@ -2,7 +2,6 @@
 target/
 out/
 build/
-resources/static/node_modules/
 logs/
 *.iml
 *.xml
@@ -16,3 +15,5 @@ logs/
 !logback-spring.xml
 resources/static/gulpfile.jsUU
 resources/static/index2.html
+resources/static/node_modules/
+resources/static/dist/

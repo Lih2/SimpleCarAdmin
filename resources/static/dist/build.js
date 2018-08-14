@@ -20765,6 +20765,7 @@ var CarList = function (_React$Component) {
             cars: []
         };
         _this.carService = new _carService.CarService();
+        _this.carFormRef = _react2.default.createRef();
         return _this;
     }
 
@@ -20786,12 +20787,29 @@ var CarList = function (_React$Component) {
             });
         }
     }, {
-        key: 'addCar',
-        value: function addCar(carState) {
+        key: 'editCar',
+        value: function editCar(number) {
             var _this3 = this;
 
+            this.carService.getCar(number).then(function (data) {
+                _this3.carFormRef.current.setState({
+                    number: data.number,
+                    name: data.name,
+                    price: data.price,
+                    year: data.year
+                });
+            }).catch(function (error) {
+                alert("Ошибка загрузки автомобиля");
+                console.log("Ошибка загрузки автомобиля");
+            });
+        }
+    }, {
+        key: 'addCar',
+        value: function addCar(carState) {
+            var _this4 = this;
+
             this.carService.addCar(carState.number, carState.name, carState.year, carState.price).then(function (data) {
-                _this3.setState({
+                _this4.setState({
                     cars: data
                 });
             }).catch(function (error) {
@@ -20802,10 +20820,10 @@ var CarList = function (_React$Component) {
     }, {
         key: 'deleteCar',
         value: function deleteCar(number) {
-            var _this4 = this;
+            var _this5 = this;
 
             this.carService.deleteCar(number).then(function (data) {
-                _this4.setState({ cars: data });
+                _this5.setState({ cars: data });
             }).catch(function (error) {
                 alert("Ошибка удаления автомобиля");
                 console.log("Ошибка удаления автомобиля");
@@ -20814,14 +20832,16 @@ var CarList = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this5 = this;
+            var _this6 = this;
 
             return _react2.default.createElement('div', null, _react2.default.createElement(_carForm.CarForm, { addCar: function addCar(state) {
-                    return _this5.addCar(state);
-                } }), _react2.default.createElement('table', { className: 'table' }, _react2.default.createElement('thead', null, _react2.default.createElement('tr', null, _react2.default.createElement('th', null, "\u041D\u043E\u043C\u0435\u0440 \u043C\u0430\u0448\u0438\u043D\u044B"), _react2.default.createElement('th', null, "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435"), _react2.default.createElement('th', null, "\u0413\u043E\u0434"), _react2.default.createElement('th', null, "\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C"), _react2.default.createElement('th', null))), _react2.default.createElement('tbody', null, this.state.cars.map(function (item) {
+                    return _this6.addCar(state);
+                }, ref: this.carFormRef }), _react2.default.createElement('table', { className: 'table' }, _react2.default.createElement('thead', null, _react2.default.createElement('tr', null, _react2.default.createElement('th', null, "\u041D\u043E\u043C\u0435\u0440 \u043C\u0430\u0448\u0438\u043D\u044B"), _react2.default.createElement('th', null, "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435"), _react2.default.createElement('th', null, "\u0413\u043E\u0434"), _react2.default.createElement('th', null, "\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C"), _react2.default.createElement('th', null))), _react2.default.createElement('tbody', null, this.state.cars.map(function (item) {
                 return _react2.default.createElement('tr', { key: item.number }, _react2.default.createElement('td', null, item.number), _react2.default.createElement('td', null, item.name), _react2.default.createElement('td', null, item.year), _react2.default.createElement('td', null, item.price), _react2.default.createElement('td', null, _react2.default.createElement('button', { className: 'btn btn-default', onClick: function onClick() {
-                        return _this5.deleteCar(item.number);
-                    } }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C")));
+                        return _this6.deleteCar(item.number);
+                    } }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"), _react2.default.createElement('button', { className: 'btn btn-default', onClick: function onClick() {
+                        return _this6.editCar(item.number);
+                    } }, "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C")));
             }))));
         }
     }]);
@@ -20864,6 +20884,25 @@ var CarService = exports.CarService = function () {
             return new Promise(function (resolve, reject) {
                 $.ajax('/caradmin', {
                     type: 'GET',
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: resolve,
+                    error: reject
+                });
+            });
+        }
+    }, {
+        key: 'getCar',
+        value: function getCar(number) {
+
+            var JSONObject = {
+                "number": number
+            };
+
+            return new Promise(function (resolve, reject) {
+                $.ajax('/caredit', {
+                    data: JSON.stringify(JSONObject),
+                    type: 'POST',
                     contentType: "application/json",
                     dataType: "json",
                     success: resolve,
