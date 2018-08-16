@@ -10,9 +10,12 @@ class CarList extends React.Component {
         super(props);
         this.state = {
             cars: [],
+            carnumber:'',
+            carname:'',
+            carprice:0,
+            caryear:2018
         };
         this.carService = new CarService();
-        this.carFormRef = React.createRef();
     }
 
     componentDidMount() {
@@ -33,12 +36,12 @@ class CarList extends React.Component {
      editCar(number) {
                this.carService.getCar(number).then(
                    (data) => {
-                      this.carFormRef.current.setState(
+                      this.setState(
                       {
-                        number:data.number,
-                        name:data.name,
-                        price:data.price,
-                        year:data.year
+                        carnumber:data.number,
+                        carname:data.name,
+                        carprice:data.price,
+                        caryear:data.year
                       })
                    })
                    .catch((error) => {
@@ -48,8 +51,13 @@ class CarList extends React.Component {
 
      }
 
-    addCar(carState) {
-        this.carService.addCar(carState.number,carState.name,carState.year,carState.price).then(
+    addCar() {
+        this.carService.addCar(
+            this.state.carnumber,
+            this.state.carname,
+            this.state.caryear,
+            this.state.carprice)
+            .then(
             (data) => {
                 this.setState(
                     {
@@ -77,7 +85,14 @@ class CarList extends React.Component {
 
     render() {
         return (<div>
-			<CarForm addCar={(state) => this.addCar(state)} ref={this.carFormRef}/>
+			<CarForm
+			addCar={() => this.addCar()}
+			changeCar={(name,value) => {this.setState({[name]:value})}}
+			carname={this.state.carname}
+            carnumber={this.state.carnumber}
+            caryear={this.state.caryear}
+            carprice={this.state.carprice}
+			/>
             <table className="table">
                 <thead>
                 <tr>
