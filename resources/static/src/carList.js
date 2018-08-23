@@ -10,10 +10,11 @@ class CarList extends React.Component {
         super(props);
         this.state = {
             cars: [],
-            carnumber:'',
-            carname:'',
-            carprice:0,
-            caryear:2018
+            carItem:{
+            number:'',
+            name:'',
+            price:0,
+            year:2018}
         };
         this.carService = new CarService();
     }
@@ -38,10 +39,12 @@ class CarList extends React.Component {
                    (data) => {
                       this.setState(
                       {
-                        carnumber:data.number,
-                        carname:data.name,
-                        carprice:data.price,
-                        caryear:data.year
+                        carItem:{
+                            number:data.number,
+                            name:data.name,
+                            price:data.price,
+                            year:data.year
+                         }
                       })
                    })
                    .catch((error) => {
@@ -52,16 +55,12 @@ class CarList extends React.Component {
      }
 
     addCar() {
-        this.carService.addCar(
-            this.state.carnumber,
-            this.state.carname,
-            this.state.caryear,
-            this.state.carprice)
+        this.carService.addCar(this.state.carItem)
             .then(
             (data) => {
                 this.setState(
                     {
-                        cars: data,
+                       cars: data,
                     });
             })
             .catch((error) => {
@@ -72,7 +71,6 @@ class CarList extends React.Component {
     }
 
     deleteCar(number) {
-
         this.carService.deleteCar(number).then(
             (data) => {
                 this.setState({cars: data});
@@ -87,11 +85,8 @@ class CarList extends React.Component {
         return (<div>
 			<CarForm
 			addCar={() => this.addCar()}
-			changeCar={(name,value) => {this.setState({[name]:value})}}
-			carname={this.state.carname}
-            carnumber={this.state.carnumber}
-            caryear={this.state.caryear}
-            carprice={this.state.carprice}
+			changeCar={(name,value) => this.setState({ carItem : Object.assign({}, this.state.carItem , {[name]: value})})}
+			car={this.state.carItem}
 			/>
             <table className="table">
                 <thead>

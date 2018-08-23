@@ -31,13 +31,13 @@ export class CarService {
             });
     }
 
-    addCar(number, name, year, price) {
+    addCar(carItem) {
 
         let JSONObject = {
-            "name": name,
-            "number": number,
-            "price": price,
-            "year": year
+            "name": carItem.name,
+            "number": carItem.number,
+            "price": carItem.price,
+            "year": carItem.year
         };
 
         return new Promise((resolve, reject) => {
