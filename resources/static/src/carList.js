@@ -14,7 +14,9 @@ class CarList extends React.Component {
             number:'',
             name:'',
             price:0,
-            year:2018}
+            year:2018},
+            showAddComponent:false,
+            showEditComponent:false
         };
         this.carService = new CarService();
     }
@@ -55,6 +57,7 @@ class CarList extends React.Component {
      }
 
     addCar() {
+
         this.carService.addCar(this.state.carItem)
             .then(
             (data) => {
@@ -67,6 +70,13 @@ class CarList extends React.Component {
                 alert("Ошибка добавления автомобиля");
                 console.log("Ошибка добавления автомобиля");
             });
+
+            this.setState(
+            {
+              showAddComponent:false,
+              showEditComponent:false
+            }
+            );
 
     }
 
@@ -83,54 +93,84 @@ class CarList extends React.Component {
 
     render() {
         return (<div>
-			<CarForm
-			addCar={() => this.addCar()}
-			changeCar={(name,value) => this.setState({ carItem : Object.assign({}, this.state.carItem , {[name]: value})})}
-			car={this.state.carItem}
-			/>
-            <table className="table">
-                <thead>
-                <tr>
-                    <th>
-                        Номер машины
-                    </th>
-                    <th>
-                        Название
-                    </th>
-                    <th>
-                        Год
-                    </th>
-                    <th>
-                        Стоимость
-                    </th>
-                    <th>
-                    </th>
-                </tr>
-                </thead>
 
-                <tbody>
-                {this.state.cars.map(item => {
-                    return (
-                        <tr key={item.number}>
-                            <td>{item.number}</td>
-                            <td>{item.name}</td>
-                            <td>{item.year}</td>
-                            <td>{item.price}</td>
-                            <td>
-                                 <button className="btn btn-default" onClick={()  => this.deleteCar(item.number)}>
-                                    Удалить
-                                 </button>
-                                 <button className="btn btn-default" onClick={()  => this.editCar(item.number)}>
-                                    Редактировать
-                                 </button>
-                            </td>
-                        </tr>
-                    );
-                })
-                }
-                </tbody>
-            </table>
-        </div>);
+                   <button className="btn btn-default" onClick={()  =>
+                        this.setState(
+                            {
+                               showAddComponent:true,
+                               showEditComponent:false
+                            }
+                        )}>
+                        Добавить автомобиль
+                    </button>
+
+
+                    {this.state.showAddComponent &&
+                        <div><h1>Добавление нового автомобиля</h1>
+			                <CarForm
+        			            addCar={() => this.addCar()}
+	        		            changeCar={(name,value) => this.setState({ carItem : Object.assign({}, this.state.carItem , {[name]: value})})}
+                                car={this.state.carItem}
+			                />
+			             </div>}
+
+                    {this.state.showEditComponent &&
+                        <div><h1>Редактирование автомобиля номер {this.state.carItem.number}</h1>
+			                <CarForm
+			                    addCar={() => this.addCar()}
+			                    changeCar={(name,value) => this.setState({ carItem : Object.assign({}, this.state.carItem , {[name]: value})})}
+			                    car={this.state.carItem}
+			                 />
+			             </div>}
+
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                Номер машины
+                                </th>
+                                <th>
+                                Название
+                                </th>
+                                <th>
+                                Год
+                                </th>
+                                <th>
+                                Стоимость
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.cars.map(item => {
+                                return (
+                                <tr key={item.number}>
+                                    <td>{item.number}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.year}</td>
+                                    <td>{item.price}</td>
+                                    <td>
+                                        <button className="btn btn-default" onClick={()  => this.deleteCar(item.number)}>
+                                            Удалить
+                                        </button>
+                                        <button className="btn btn-default" onClick={()  => {
+                                            this.setState(
+                                            {
+                                                showAddComponent:false,
+                                                showEditComponent:true
+                                            });
+                                            this.editCar(item.number)}}>
+                                                Редактировать
+                                            </button>
+                                    </td>
+                                </tr>
+                            );
+                          })
+                       }
+                       </tbody>
+                   </table>
+             </div>);
     }
 }
 
