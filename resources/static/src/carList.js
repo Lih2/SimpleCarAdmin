@@ -107,7 +107,7 @@ class CarList extends React.Component {
                     {this.state.showAddComponent &&
                         <div><h1>Добавление нового автомобиля</h1>
 			                <CarForm
-	        		            changeCar={(name,value) => this.setState({ carItem : Object.assign({}, this.state.carItem , {[name]: value})})}
+	        		            changeCar={(car) => this.setState({ carItem : car  })}
                                 car={this.state.carItem}
 			                />
                         <div className="col-xs-offset-9 col-xs-6">
@@ -118,7 +118,7 @@ class CarList extends React.Component {
                     {this.state.showEditComponent &&
                         <div><h1>Редактирование автомобиля номер {this.state.carItem.number}</h1>
 			                <CarForm
-			                    changeCar={(name,value) => this.setState({ carItem : Object.assign({}, this.state.carItem , {[name]: value})})}
+	        		            changeCar={(car) => this.setState({ carItem : car  })}
 			                    car={this.state.carItem}
 			                 />
                         <div className="col-xs-offset-9 col-xs-6">
