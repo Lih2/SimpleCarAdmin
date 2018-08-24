@@ -9,8 +9,7 @@ export class CarForm extends React.Component {
     }
 
     render() {
-        return (<form onSubmit={(e) => {e.preventDefault(); this.props.addCar()}}>
-                <div className="row">
+        return ( <div className="row">
                     <div className="col-xs-12 divfon">
 
                         <div className="form-group col-xs-2">
@@ -34,25 +33,15 @@ export class CarForm extends React.Component {
                                    className="form-control" placeholder="Стоимость"/>
                         </div>
 
-                        <div className="form-group col-xs-offset-9 col-xs-6">
-                            <button className="btn btn-default">Все верно, отправить</button>
-                        </div>
-
                         <div className="clearfix"></div>
 
                     </div>
                 </div>
-            </form>);
+                );
     }
 }
 
 CarForm.propTypes = {
-    addCar: PropTypes.func,
     changeCar: PropTypes.func,
-	carItem: PropTypes.shape({
-        number: PropTypes.string,
-        name: PropTypes.string,
-        year: PropTypes.number,
-        price: PropTypes.number
-      })
+	carItem: PropTypes.object
 }

@@ -57,7 +57,6 @@ class CarList extends React.Component {
      }
 
     addCar() {
-
         this.carService.addCar(this.state.carItem)
             .then(
             (data) => {
@@ -108,19 +107,24 @@ class CarList extends React.Component {
                     {this.state.showAddComponent &&
                         <div><h1>Добавление нового автомобиля</h1>
 			                <CarForm
-        			            addCar={() => this.addCar()}
 	        		            changeCar={(name,value) => this.setState({ carItem : Object.assign({}, this.state.carItem , {[name]: value})})}
                                 car={this.state.carItem}
 			                />
+                        <div className="col-xs-offset-9 col-xs-6">
+                            <button onClick={ () => this.addCar() } className="btn btn-default">Добавить автомобиль</button>
+                        </div>
 			             </div>}
 
                     {this.state.showEditComponent &&
                         <div><h1>Редактирование автомобиля номер {this.state.carItem.number}</h1>
 			                <CarForm
-			                    addCar={() => this.addCar()}
 			                    changeCar={(name,value) => this.setState({ carItem : Object.assign({}, this.state.carItem , {[name]: value})})}
 			                    car={this.state.carItem}
 			                 />
+                        <div className="col-xs-offset-9 col-xs-6">
+                            <button onClick={()=>this.addCar()} className="btn btn-default">Редактировать автомобиль</button>
+                        </div>
+
 			             </div>}
 
                     <table className="table">
