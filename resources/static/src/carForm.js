@@ -8,11 +8,6 @@ export class CarForm extends React.Component {
         super(props);
     }
 
-    setCar(name,value) {
-
-    }
-
-
     render() {
         return ( <div className="row">
                     <div className="col-xs-12 divfon">
