@@ -2,6 +2,7 @@ package ru.ocrimea.simplecaradmin;
 
 import java.util.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -10,13 +11,14 @@ import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
-@Repository
 @Service
-
 @Slf4j
 public class CarStorage {
 
-    private ArrayList<Car> cars = new ArrayList<>();
+    ///private ArrayList<Car> cars = new ArrayList<>();
+
+    @Autowired
+    CarRepository repository;
 
     public CarStorage() {
     }
@@ -29,15 +31,13 @@ public class CarStorage {
         add("ДА197М777","Smart Forfour 0.9t",2016,2000000);
     }
 
-
     public ArrayList<Car> getCars() {
-        return cars;
+        return new ArrayList(repository.findAll());
     }
 
     public void add(Car car) {
-        delete(car.getNumber());
+        repository.save(car);
         log.info("Adding Car" + car.getNumber());
-        cars.add(car);
     }
 
     public void add (String number,String name,int year,float price) {
@@ -45,28 +45,16 @@ public class CarStorage {
     }
 
     public void delete(String number) {
-        Iterator<Car> carIterator=cars.iterator();
-        while(carIterator.hasNext()) {
-            Car car = carIterator.next();
-            if( car.getNumber().equals(number)) {
-                log.info("Deleting Car" + number);
-                carIterator.remove();
-            }
-        }
+        repository.deleteById(number);
+        log.info("Deleting Car" + number);
     }
 
     public Car getCarForNumber(String number) {
-        Iterator<Car> carIterator=cars.iterator();
-        while(carIterator.hasNext()) {
-            Car car = carIterator.next();
-            if( car.getNumber().equals(number)) return car;
-        }
-        return new Car("","",2018,0);
+        return repository.findById(number).orElse(new Car());
     }
 
-
     public void empty() {
-        cars.clear();
+        repository.deleteAll();
     }
 
 

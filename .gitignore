@@ -9,6 +9,7 @@ logs/
 !build.xml
 !pom.xml
 *.properties
+!application.properties
 .gradle/
 !gradle-wrapper.properties
 !gradle-wrapper.jar
